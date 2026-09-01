@@ -1,27 +1,23 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const { data: page, pending } = await useAsyncData('page-' + route.path, () => {
-  return queryCollection('content').path(route.path).first()
-})
+const { data: page, pending } = useLazyAsyncData(
+  () => `page-${route.path}`,
+  async () => {
+    // await new Promise(r => setTimeout(r, 5000))  
+    return queryCollection('content').path(route.path).first()
+  },
+  { watch: [route.path] }
+)
 
 // ? el seo sigue siendo lo peor que se me da...
-if (page.value) {
-  useHead(() => ({
-    title: page.value ? `${page.value.title} ~ ` : ''
-  }))
+useHead(() => ({
+  title: page.value ? `${page.value.title} ~ ` : 'Not Found ~ '
+}))
 
-  watchEffect(() => {
-    route.meta.verticalTitle = page.value?.title ?? 'Projects'
-  })
-} else {
-  useHead(() => ({
-    title: 'Not Found ~ '
-  }))
-  watchEffect(() => {
-    route.meta.verticalTitle = '404 - 404 - 404'
-  })
-}
+watchEffect(() => {
+  route.meta.verticalTitle = page.value?.title ?? '404 - 404 - 404'
+})
 </script>
 
 <template>
@@ -34,7 +30,7 @@ if (page.value) {
 
     <!-- banner + info superpuesta -->
     <div class="z-50 relative overflow-hidden w-full text-white rounded-lg p-12">
-      <img :alt="`${page.title} Banner`" :aria-label="`${page.title} Banner`" class="z-10 absolute w-full h-full top-0 left-0 object-cover" :src="`/projects/${page.meta.banner}`" />
+      <img :alt="`${page.title} Banner`" :aria-label="`${page.title} Banner`" class="z-10 absolute w-full h-full top-0 left-0 object-cover select-none pointer-events-none" :src="`/projects/${page.meta.banner}`" />
       <div class="z-20 absolute inset-0 bg-gradient-to-t from-golden/25 via-black/75 to-black" />
 
       <div class="z-30 relative flex flex-col justify-end min-h-72">
@@ -79,6 +75,21 @@ if (page.value) {
 
     <!-- contenido -->
     <ContentRenderer :value="page" />
+  </div>
+
+  <div v-else-if="pending" class="w-1/2 h-full animate-pulse">
+    <div class="flex items-center mt-12 mb-4 gap-1">
+      <div class="w-6 h-6 bg-main rounded" />
+      <div class="h-6 w-48 bg-main rounded" />
+    </div>
+    <div class="relative overflow-hidden w-full bg-main rounded-lg p-12 h-64" />
+    <div class="mt-8 space-y-4">
+      <div class="h-4 w-full bg-main rounded" />
+      <div class="h-4 w-5/6 bg-main rounded" />
+      <div class="h-4 w-3/4 bg-main rounded" />
+      <div class="h-4 w-full bg-main rounded" />
+      <div class="h-4 w-2/3 bg-main rounded" />
+    </div>
   </div>
 
   <NotFoundPage v-else />

@@ -22,11 +22,11 @@ export default defineNuxtConfig({
         { property: 'og:site_name', content: 'Aexhell' },
         { property: 'og:title', content: 'Aexhell — Web Developer' },
         { property: 'og:description', content: 'Waving the virtual tapestry of the Internet, developing immersive online experiences.' },
-        { property: 'og:image', content: '/social-share.jpg' },
+        { property: 'og:image', content: '/banner.png' },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Aexhell — Web Developer' },
         { name: 'twitter:description', content: 'Waving the virtual tapestry of the Internet, developing immersive online experiences.' },
-        { name: 'twitter:image', content: '/social-share.jpg' }
+        { name: 'twitter:image', content: '/banner.png' }
       ],
       script: [],
       link: [

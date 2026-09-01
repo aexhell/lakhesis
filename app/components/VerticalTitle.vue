@@ -15,7 +15,7 @@ const animate = computed(() => title.value !== "Aexhell" && shift.value > 0)
 
 <template>
   <Transition name="title" mode="out-in" :duration="350">
-    <h1 :key="title" :class="{ mq: animate }" :style="{ '--shift': `${shift}cqh` }" class="font-display uppercase font-normal relative vertical-title vertical-text select-none pointer-events-none">
+    <h1 :key="title" :class="{ mq: animate }" :style="{ '--shift': `${shift}cqh` }" class="lg:block hidden font-display uppercase font-normal relative vertical-title vertical-text select-none pointer-events-none">
       {{ title }}
     </h1>
   </Transition>

@@ -5,9 +5,10 @@ const { data: page, pending } = await useAsyncData('page-' + route.path, () => {
   return queryCollection('content').path(route.path).first()
 })
 
+// ? el seo sigue siendo lo peor que se me da...
 if (page.value) {
   useHead(() => ({
-    title: page.value ? `${page.value.title} ~ Aexhell` : 'Aexhell'
+    title: page.value ? `${page.value.title} ~ ` : ''
   }))
 
   watchEffect(() => {
@@ -15,7 +16,7 @@ if (page.value) {
   })
 } else {
   useHead(() => ({
-    title: 'Not Found ~ Aexhell'
+    title: 'Not Found ~ '
   }))
   watchEffect(() => {
     route.meta.verticalTitle = '404 - 404 - 404'
@@ -33,7 +34,7 @@ if (page.value) {
 
     <!-- banner + info superpuesta -->
     <div class="z-50 relative overflow-hidden w-full text-white rounded-lg p-12">
-      <img class="z-10 absolute w-full h-full top-0 left-0 object-cover" :src="`/projects/${page.meta.banner}`" />
+      <img :alt="`${page.title} Banner`" :aria-label="`${page.title} Banner`" class="z-10 absolute w-full h-full top-0 left-0 object-cover" :src="`/projects/${page.meta.banner}`" />
       <div class="z-20 absolute inset-0 bg-gradient-to-t from-golden/25 via-black/75 to-black" />
 
       <div class="z-30 relative flex flex-col justify-end min-h-72">

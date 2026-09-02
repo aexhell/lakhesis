@@ -29,7 +29,7 @@ useSeoMeta({
   ogImage: () => page.value?.meta?.banner
     ? `/projects/${page.value.meta?.banner}`
     : '/banner.png',
-  ogUrl: () => `https://aexhell.dev${route.path}`,  // tu dominio real
+  ogUrl: () => window.location.href,
 
   // Twitter
   twitterCard: 'summary_large_image',

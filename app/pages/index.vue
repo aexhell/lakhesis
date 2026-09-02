@@ -10,7 +10,7 @@
             v-for="(proj, i) in group.items"
             :key="proj.path"
             :to="proj.path"
-            class="no-underline block font-display text-[13cqh] 2xl:text-[14cqh] xl:text-[7cqw] lg:text-[12cqh] relative font-medium uppercase m-0"
+            class="no-underline block leading-tight font-display text-[13cqh] 2xl:text-[14cqh] xl:text-[7cqw] lg:text-[12cqh] relative font-medium uppercase m-0"
          >
             {{ proj.title }}
          </nuxt-link>

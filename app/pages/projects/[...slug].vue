@@ -18,11 +18,33 @@ useHead(() => ({
   title: page.value ? `${page.value.title} ~ ` : 'Not Found ~ '
 }))
 
+useSeoMeta({
+  title: () => page.value ? `${page.value.title} ~ ` : 'Not Found ~ ',
+  description: () => page.value?.meta?.summary ?? 'Project by Aexhell',
+
+  // Open Graph
+  ogTitle: () => page.value?.title ?? '',
+  ogDescription: () => page.value?.meta?.summary ?? '',
+  ogType: 'article',
+  ogImage: () => page.value?.meta?.banner
+    ? `/projects/${page.value.meta?.banner}`
+    : '/banner.png',
+  ogUrl: () => `https://aexhell.dev${route.path}`,  // tu dominio real
+
+  // Twitter
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => page.value?.title ?? '',
+  twitterDescription: () => page.value?.meta?.summary ?? '',
+  twitterImage: () => page.value?.meta?.banner
+    ? `/projects/${page.value.meta?.banner}`
+    : '/banner.png',
+})
+
 watchEffect(() => {
   route.meta.verticalTitle = page.value?.title ?? '404 - 404 - 404'
   hero.value = {
     title: page.value?.title ?? defaultHero.title,
-    description: page.value?.meta.summary ?? page.value?.description ?? defaultHero.description,
+    description: page.value?.meta?.summary ?? page.value?.meta?.description ?? defaultHero.description,
     front_page: page.value ? false : true
   }
 })

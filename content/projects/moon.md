@@ -1,9 +1,10 @@
 ---
 title: Moon
+summary: My first project on web app development.
 banner: nc.webp
 label: Position
 acting: Founder
-year: 2020
+year: 2020.03
 role: Lead Developer
 type: IRC Application
 tech:

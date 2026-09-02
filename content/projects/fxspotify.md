@@ -1,9 +1,10 @@
 ---
 title: FxSpotify
+summary: Quick website for embedding Spotify songs on Discord.
 banner: fxspotify.webp
 label: Position
 acting: Founder
-year: 2025
+year: 2025.01
 role: Lead Developer
 type: Website
 tech:

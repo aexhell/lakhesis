@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { defaultHero } from '~/composables/useHeroInfo'
+
 const route = useRoute()
+const hero = useHeroInfo()
 
 const { data: page, pending } = useLazyAsyncData(
   () => `page-${route.path}`,
@@ -17,6 +20,11 @@ useHead(() => ({
 
 watchEffect(() => {
   route.meta.verticalTitle = page.value?.title ?? '404 - 404 - 404'
+  hero.value = {
+    title: page.value?.title ?? defaultHero.title,
+    description: page.value?.meta.summary ?? page.value?.description ?? defaultHero.description,
+    front_page: page.value ? false : true
+  }
 })
 </script>
 
@@ -74,10 +82,10 @@ watchEffect(() => {
     </div>
 
     <!-- contenido -->
-    <ContentRenderer :value="page" />
+    <ContentRenderer class="leading-7" :value="page" />
   </div>
 
-  <div v-else-if="pending" class="w-1/2 h-full animate-pulse">
+  <div v-else-if="pending" class="page-resolution h-full animate-pulse">
     <div class="flex items-center mt-12 mb-4 gap-1">
       <div class="w-6 h-6 bg-main rounded" />
       <div class="h-6 w-48 bg-main rounded" />

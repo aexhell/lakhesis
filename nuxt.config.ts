@@ -6,9 +6,10 @@ export default defineNuxtConfig({
   ],
   devtools: { enabled: false },
   compatibilityDate: '2024-04-03',
-  css: ['@/assets/app.css'],
+  css: ['@/assets/fonts.css', '@/assets/app.css'],
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
+    rootId: '__lakhesis',
     head: {
       htmlAttrs: {
         class: '',

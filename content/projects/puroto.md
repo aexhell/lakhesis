@@ -1,9 +1,10 @@
 ---
 title: Puroto
+summary: Social media for furries.
 banner: puroto.webp
 label: Position
 acting: Volunteer
-year: 2021
+year: 2021.09
 role: Front-end Developer
 type: Web Application
 tech:

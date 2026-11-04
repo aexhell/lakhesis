@@ -2,15 +2,16 @@
 import { defaultHero } from '~/composables/useHeroInfo'
 
 const route = useRoute()
+const requestUrl = useRequestURL()
 const hero = useHeroInfo()
 
-const { data: page, pending } = useLazyAsyncData(
+const { data: page, status } = useLazyAsyncData(
   () => `page-${route.path}`,
   async () => {
     // await new Promise(r => setTimeout(r, 5000))  
     return queryCollection('content').path(route.path).first()
   },
-  { watch: [route.path] }
+  { watch: [() => route.path] }
 )
 
 // ? el seo sigue siendo lo peor que se me da...
@@ -29,7 +30,7 @@ useSeoMeta({
   ogImage: () => page.value?.meta?.banner
     ? `/projects/${page.value.meta?.banner}`
     : '/banner.png',
-  ogUrl: () => window.location.href,
+  ogUrl: () => requestUrl.href,
 
   // Twitter
   twitterCard: 'summary_large_image',
@@ -107,7 +108,7 @@ watchEffect(() => {
     <ContentRenderer class="leading-7" :value="page" />
   </div>
 
-  <div v-else-if="pending" class="page-resolution h-full animate-pulse">
+  <div v-else-if="status === 'idle' || status === 'pending'" class="page-resolution h-full animate-pulse" role="status">
     <div class="flex items-center mt-12 mb-4 gap-1">
       <div class="w-6 h-6 bg-main rounded" />
       <div class="h-6 w-48 bg-main rounded" />

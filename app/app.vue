@@ -31,6 +31,22 @@
 const route = useRoute()
 const hero = useHeroInfo()
 
+if (route.path.startsWith('/projects/')) {
+  const { data: page } = await useAsyncData(
+    () => `page-${route.path}`,
+    () => queryCollection('content').path(route.path).first()
+  )
+
+  if (page.value) {
+    route.meta.verticalTitle = page.value.title
+    hero.value = {
+      title: page.value.title,
+      description: page.value.meta?.summary ?? page.value.meta?.description ?? hero.value.description,
+      front_page: false
+    }
+  }
+}
+
 useHead({
   title: () => {
     const title = String(route.meta.title ?? '')

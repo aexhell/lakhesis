@@ -43,6 +43,8 @@ useSeoMeta({
 
 watchEffect(() => {
   route.meta.verticalTitle = page.value?.title ?? '404 - 404 - 404'
+  if (!page.value && (status.value === 'idle' || status.value === 'pending')) return
+
   hero.value = {
     title: page.value?.title ?? defaultHero.title,
     description: page.value?.meta?.summary ?? page.value?.meta?.description ?? defaultHero.description,

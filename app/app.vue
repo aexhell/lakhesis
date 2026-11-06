@@ -3,7 +3,11 @@
     <div class="absolute w-8 h-full top-0 left-0 z-[10]">
       <Isotype class="w-5 h-5 absolute top-2 left-2" />
       <span class="text-xs uppercase absolute bottom-8 left-2 vertical-text"><b>2026</b> ©AXHL</span>
-      <div class="cube-anim w-4 h-4 bg-main absolute bottom-32 left-2"></div>
+      <div class="w-4 h-4 rounded-tl-1.5 bg-main absolute bottom-32 left-2"></div>
+      <div class="w-4 h-4 rounded-tr-1.5 bg-main absolute bottom-38 left-2"></div>
+      <div class="w-4 h-4 rounded-bl-1.5 bg-main absolute bottom-44 left-2"></div>
+      <div class="w-4 h-4 rounded-br-1.5 bg-main absolute bottom-50 left-2"></div>
+      <div class="cube-anim w-4 h-4 bg-main absolute top-3/5 left-2"></div>
     </div>
     <div id="LIENZO" class="z-[10] size-container w-full relative overflow-hidden grid-background h-full flex box-border border border-solid border-main">
       <VerticalTitle />
